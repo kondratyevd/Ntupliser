@@ -36,9 +36,9 @@ UFDiMuonsAnalyzer::UFDiMuonsAnalyzer(const edm::ParameterSet& iConfig):
   _trigObjsToken    = consumes<pat::TriggerObjectStandAloneCollection> (iConfig.getParameter<edm::InputTag>("trigObjs"));
 
   // L1 ECAL prefiring event weights and systematic variations
-  _prefweight_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProb"));
-  _prefweightup_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProbUp"));
-  _prefweightdown_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProbDown"));
+  //  _prefweight_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProb"));
+  //  _prefweightup_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProbUp"));
+  //  _prefweightdown_token = consumes< double > (edm::InputTag("prefiringweight:nonPrefiringProbDown"));
 
   // Event flags
   _evtFlagsToken = consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("evtFlags"));
@@ -216,17 +216,17 @@ void UFDiMuonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
     // L1 prefiring weights
     // --------------------
   
-    edm::Handle< double > theprefweight;
-    iEvent.getByToken(_prefweight_token, theprefweight);
-    _prefiringweight = (*theprefweight);
+    //edm::Handle< double > theprefweight;
+    //iEvent.getByToken(_prefweight_token, theprefweight);
+    //_prefiringweight = (*theprefweight);
   
-    edm::Handle< double > theprefweightup;
-    iEvent.getByToken(_prefweightup_token, theprefweightup);
-    _prefiringweightup = (*theprefweightup);
+    //edm::Handle< double > theprefweightup;
+    //iEvent.getByToken(_prefweightup_token, theprefweightup);
+    //_prefiringweightup = (*theprefweightup);
   
-    edm::Handle< double > theprefweightdown;
-    iEvent.getByToken(_prefweightdown_token, theprefweightdown);
-    _prefiringweightdown = (*theprefweightdown);  
+    //edm::Handle< double > theprefweightdown;
+    //iEvent.getByToken(_prefweightdown_token, theprefweightdown);
+    //_prefiringweightdown = (*theprefweightdown);  
 
 
     if (_isVerbose) std::cout << "\nAccessing LHEEventProduct info" << std::endl;
@@ -828,9 +828,9 @@ void UFDiMuonsAnalyzer::beginJob() {
     _outTree->Branch("PU_wgt_down", &_PU_wgt_down, "PU_wgt_down/F" );
     _outTree->Branch("GEN_wgt",     &_GEN_wgt,     "GEN_wgt/I"     );
 
-    _outTree->Branch("l1pref_wgt",     &_prefiringweight,     "l1pref_wgt/F"     );
-    _outTree->Branch("l1pref_wgt_up",     &_prefiringweightup,     "l1pref_wgt_up/F"     );
-    _outTree->Branch("l1pref_wgt_down",     &_prefiringweightdown,     "l1pref_wgt_down/F"     );
+    //_outTree->Branch("l1pref_wgt",     &_prefiringweight,     "l1pref_wgt/F"     );
+    //_outTree->Branch("l1pref_wgt_up",     &_prefiringweightup,     "l1pref_wgt_up/F"     );
+    //_outTree->Branch("l1pref_wgt_down",     &_prefiringweightdown,     "l1pref_wgt_down/F"     );
   
     _outTree->Branch("nGenParents", (int*) &_nGenParents );
     _outTree->Branch("nGenMuons",   (int*) &_nGenMuons   );
