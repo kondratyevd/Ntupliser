@@ -1,7 +1,7 @@
-
 #include "Ntupliser/DiMuons/interface/MuPairHelper.h"
+#include "Ntupliser/DiMuons/interface/CompositeCandMassResolution.h"
 
-void FillMuPairInfos( MuPairInfos& _pairInfos, const MuonInfos _muonInfos ) {
+void FillMuPairInfos( MuPairInfos& _pairInfos, const MuonInfos _muonInfos, pat::MuonCollection muonsSelected) {
 
   _pairInfos.clear();
   if (_muonInfos.size() < 2)
@@ -185,6 +185,18 @@ void FillMuPairInfos( MuPairInfos& _pairInfos, const MuonInfos _muonInfos ) {
       _pairInfo.mass_Roch_sys_down = pair_vec.nom.M();
       _pairInfo.pt_Roch_sys_down   = pair_vec.nom.Pt();
     }
+
+    pat::Muon mu1 = muonsSelected.at(iMu1);
+    pat::Muon mu2 = muonsSelected.at(iMu2);
+    pat::CompositeCandidate mumu;
+    mumu.addDaughter(mu1, "mu1");
+    mumu.addDaughter(mu2, "mu2");
+    AddFourMomenta addP4;
+    addP4.set(mumu);
+    CompositeCandMassResolution *res = new CompositeCandMassResolution();
+    double mass_res = res->getMassResolution(mumu);
+    //std::cout << "mu1 eta = " << mu1.eta() << "mu2 eta = "<< mu2.eta() << " resolution = "<<mass_res<<std::endl;
+    _pairInfo.mass_res = mass_res;
 
     _pairInfos.push_back( _pairInfo );
   } // End loop: for (int i = 0; i < isOS.size(); i++)

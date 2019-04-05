@@ -406,7 +406,7 @@ void UFDiMuonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 
   // Sort the selected muons by pT
   sort(muonsSelected.begin(), muonsSelected.end(), sortMuonsByPt);
- 
+
   FillMuonInfos( _muonInfos, muonsSelected, primaryVertex, verticesSelected.size(), beamSpotHandle, 
 		 iEvent, iSetup, trigObjsHandle, trigResultsHandle, _trigNames,
 		 _muon_trig_dR, _muon_use_pfIso, _muon_iso_dR, !(_isMonteCarlo), 
@@ -438,7 +438,7 @@ void UFDiMuonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   // DIMUON PAIRS
   // ------------
   if (_isVerbose) std::cout << "\nFilling MuPairInfo" << std::endl;
-  FillMuPairInfos( _muPairInfos, _muonInfos );
+  FillMuPairInfos( _muPairInfos, _muonInfos, muonsSelected);
   _nMuPairs = _muPairInfos.size();
 
   // Throw away events with only low-mass pairs

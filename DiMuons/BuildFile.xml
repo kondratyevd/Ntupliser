@@ -22,6 +22,10 @@
 <use name="DataFormats/MuonReco"/>
 <use name="DataFormats/VertexReco"/>
 
+<use name="DataFormats/PatCandidates"/>
+<use name="CommonTools/CandUtils"/>
+<use name="RecoParticleFlow/PFClusterTools"/>
+
 <use name="FWCore/Common"/>
 <use name="FWCore/Framework"/>
 <use name="FWCore/ParameterSet"/>

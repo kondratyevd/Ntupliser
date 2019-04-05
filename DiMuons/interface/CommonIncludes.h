@@ -118,6 +118,8 @@
 #include "DataFormats/PatCandidates/interface/Tau.h"
 #include "DataFormats/PatCandidates/interface/Photon.h"
 #include "DataFormats/PatCandidates/interface/MET.h"
+#include "DataFormats/PatCandidates/interface/CompositeCandidate.h"
+#include "CommonTools/CandUtils/interface/AddFourMomenta.h"
 
 // Lepton isolation
 #include "RecoEgamma/EgammaTools/interface/EffectiveAreas.h"
