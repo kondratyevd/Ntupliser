@@ -92,8 +92,8 @@ dimuons = cms.EDAnalyzer('UFDiMuonsAnalyzer',
                          ele_eta_max = cms.double(2.5),
 
                          jet_ID      = cms.string("tight"),
-                         jet_pT_min  = cms.double(20.0),
-                         jet_eta_max = cms.double(5.0),
+                         jet_pT_min  = cms.double(30.0),
+                         jet_eta_max = cms.double(4.7),
 
                          ## Event weights and efficiencies
                          PU_wgt_file      = cms.string("PU_wgt_2017_Winter17_v1.root"),
