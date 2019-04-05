@@ -65,6 +65,7 @@ void FillMuPairInfos( MuPairInfos& _pairInfos, const MuonInfos _muonInfos, pat::
     _pairInfo.dEta = _dEta;
     _pairInfo.dPhi = _dPhi;
     _pairInfo.dPhiStar = _dPhiStar;
+    _pairInfo.dThetaStarEta = _dThetaStarEta;
 
     if ( _muonInfos.at(iMu1).pt_PF > 0 && _muonInfos.at(iMu2).pt_PF > 0 ) {
       FillMuPairMasses( mu1_vec, mu2_vec, pair_vec, massErr, MASS_MUON, 
