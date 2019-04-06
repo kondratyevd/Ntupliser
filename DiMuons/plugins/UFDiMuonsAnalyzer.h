@@ -67,11 +67,17 @@ public:
   TH1D*  _PU_wgt_hist_down;
   TFile* _PU_wgt_file;
   int _GEN_wgt;    // +1 or -1 weight for nlo samples, -1 simulates interference when filling histos
+ 
+  float mu1_pt_Roch_over_mass;
+  float mu2_pt_Roch_over_mass;
+  float min_dR_mu_jet;
+  float max_dR_mu_jet;
+  float zeppenfeld;
 
   //L1 ECAL prefiring event weights and systematic uncertainty
-  float _prefiringweight; 
-  float _prefiringweightup; 
-  float _prefiringweightdown;
+  //float _prefiringweight; 
+  //float _prefiringweightup; 
+  //float _prefiringweightdown;
 
   ///////////////////////////////////////////////////////////
   // Structs  ==============================================

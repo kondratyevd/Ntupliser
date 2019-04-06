@@ -446,6 +446,19 @@ void UFDiMuonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
     if ( _muPairInfos.at(0).mass < 10 )
       return;
 
+  // Add pT/mass
+  mu1_pt_Roch_over_mass = -5;
+  mu2_pt_Roch_over_mass = -5;
+  if ((_nMuons>1)&&(_nMuPairs>0)){
+    MuonInfo muon1 = _muonInfos.at(0);
+    MuonInfo muon2 = _muonInfos.at(1);
+    MuPairInfo muPair1 = _muPairInfos.at(0);
+    //    std::cout << muon1.pt_Roch << " " << muon2.pt_Roch << " " << muPair1.mass_Roch << std::endl;  
+    if (muPair1.mass_Roch > 0.0 ){
+      mu1_pt_Roch_over_mass = muon1.pt_Roch / muPair1.mass_Roch;
+      mu2_pt_Roch_over_mass = muon2.pt_Roch / muPair1.mass_Roch;
+    }  
+  }
   // // Throw away events without a high-mass pair (< 100 GeV)
   // bool hasHighMass = false;
   // for (int iPair = 0; iPair < _nMuPairs; iPair++) {
@@ -608,6 +621,47 @@ void UFDiMuonsAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
     // if (_slimOut) FillSlimJetInfos( _slimJetInfos_JER_down, _jetInfos_JER_down );
   }
 
+  zeppenfeld = -999;
+  if ((_nMuPairs>0)&&(_nJets>1)){
+    MuPairInfo muPair_1 = _muPairInfos.at(0);
+    JetInfo jet_1 = _jetInfos.at(0);
+    JetInfo jet_2 = _jetInfos.at(1); 
+    zeppenfeld = muPair_1.eta - 0.5*(jet_1.eta + jet_2.eta)/fabs(jet_1.eta - jet_2.eta);
+  }
+
+  min_dR_mu_jet = 999;
+  max_dR_mu_jet = -999;
+
+  for (int iMu=0; iMu<_nMuons; iMu++){
+    for (int iJet=0; iJet<_nJets; iJet++){
+      MuonInfo muon = _muonInfos.at(iMu);
+      JetInfo jet = _jetInfos.at(iJet);
+      float dEta = muon.eta - jet.eta;
+      float dPhi = muon.phi - jet.phi;
+      while (dPhi>TMath::Pi()){
+        dPhi = dPhi - 2*TMath::Pi();
+      }
+      while (dPhi<-TMath::Pi()){
+	dPhi = dPhi + 2*TMath::Pi();
+      }
+      float dR = TMath::Sqrt(dEta*dEta+dPhi*dPhi);
+      if (dR>max_dR_mu_jet){
+	max_dR_mu_jet = dR;
+      }
+      if (dR<min_dR_mu_jet){
+	min_dR_mu_jet = dR;
+      }  
+    }
+  }
+
+  if (min_dR_mu_jet>900){
+    min_dR_mu_jet = -5;
+  }
+
+  if (max_dR_mu_jet<0){
+    max_dR_mu_jet = -5;
+  }
+
   // -----------
   // DIJET PAIRS
   // -----------
@@ -713,6 +767,11 @@ void UFDiMuonsAnalyzer::beginJob() {
   _outTree->Branch("eles",              (EleInfos*)      &_eleInfos          );
   // _outTree->Branch("taus",              (TauInfos*)      &_tauInfos          );
   _outTree->Branch("met",               (MetInfo*)       &_metInfo           );
+  _outTree->Branch("mu1_pt_Roch_over_mass",   &mu1_pt_Roch_over_mass,   "mu1_pt_Roch_over_mass/F"   );
+  _outTree->Branch("mu2_pt_Roch_over_mass",   &mu2_pt_Roch_over_mass,   "mu2_pt_Roch_over_mass/F"   );
+  _outTree->Branch("min_dR_mu_jet",   &min_dR_mu_jet,   "min_dR_mu_jet/F"   );
+  _outTree->Branch("max_dR_mu_jet",   &max_dR_mu_jet,   "max_dR_mu_jet/F"   );
+  _outTree->Branch("zeppenfeld",   &zeppenfeld,   "zeppenfeld/F"   );
   if (_doSys) {
     _outTree->Branch("met_JES_up",        (MetInfo*)       &_metInfo_JES_up    );
     _outTree->Branch("met_JES_down",      (MetInfo*)       &_metInfo_JES_down  );
