@@ -137,7 +137,6 @@ DoubleMu = []  ## All DoubleMuon datasets
 DAS_era_MC_a = 'RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14'
 DAS_era_MC_b = 'RunIIFall17MiniAODv2-PU2017_12Apr2018_new_pmx_94X_mc2017_realistic_v14'
 DAS_era_MC_c = 'RunIIFall17MiniAODv2-PU2017RECOSIMstep_12Apr2018_94X_mc2017_realistic_v14'
-
 # =======================================================================================================
 # ------------------------------- SIGNAL ----------------------------------------------------------------
 # =======================================================================================================
@@ -160,6 +159,11 @@ H2Mu_gg_130_NLO = sample( name = 'H2Mu_gg_130',
                           DAS  = '/GluGluHToMuMu_M130_13TeV_amcatnloFXFX_pythia8/'+DAS_era_MC_a+'-v1/MINIAODSIM',
                           nEvt = 1700000 ) ## 1.7 million
 
+H2Mu_gg_125_powheg = sample( name  = 'H2Mu_gg_powheg',
+                          DAS   = '/GluGluHToMuMu_M-125_TuneCP5_PSweights_13TeV_powheg_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM',
+                          nEvt  = 1489600, ## 1.5 million
+                          )
+
 ## Vector boson fusion
 H2Mu_VBF_120_NLO = sample( name = 'H2Mu_VBF_120',
                            DAS  = '/VBFHToMuMu_M120_13TeV_amcatnloFXFX_pythia8/'+DAS_era_MC_a+'-v1/MINIAODSIM',
@@ -172,6 +176,12 @@ H2Mu_VBF_125_NLO = sample( name = 'H2Mu_VBF',
 H2Mu_VBF_130_NLO = sample( name = 'H2Mu_VBF_130',
                            DAS  = '/VBFHToMuMu_M130_13TeV_amcatnloFXFX_pythia8/'+DAS_era_MC_a+'-v1/MINIAODSIM',
                            nEvt = 965810 ) ## 1.0 million
+
+
+H2Mu_VBF_125_powheg = sample( name  = 'H2Mu_VBF_powheg',
+                          DAS   = '/VBFHToMuMu_M-125_TuneCP5_PSweights_13TeV_powheg_pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM',
+                          nEvt  = 982200, ## 1 million
+                          )
 
 ## WH (+)
 H2Mu_WH_pos_120 = sample( name = 'H2Mu_WH_pos_120',
@@ -266,6 +276,10 @@ ZJets_AMC = sample( name = 'ZJets_AMC',
                     DAS  = '/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/'+DAS_era_MC_b+'_ext1-v1/MINIAODSIM',
                     nEvt = 182217609)  ## 182 million
 
+ZJets_VBFfilter = sample( name = 'ZJets_AMC_VBFfilter',
+                    DAS  = '/DYJetsToLL_M-105To160_VBFFilter_TuneCP5_PSweights_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_VBFPostMGFilter_94X_mc2017_realistic_v14_ext1-v1/MINIAODSIM',
+                    nEvt = 18073321)  ## 18 million
+
 ZJets_MG_1 = sample( name = 'ZJets_MG_1',
                      DAS  = '/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/'+DAS_era_MC_c+'-v1/MINIAODSIM',
                      nEvt = 48675378 ) ## 49 million
@@ -273,6 +287,14 @@ ZJets_MG_1 = sample( name = 'ZJets_MG_1',
 ZJets_MG_2 = sample( name = 'ZJets_MG_2',
                      DAS  = '/DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/'+DAS_era_MC_c+'_ext1-v1/MINIAODSIM',
                      nEvt = 49125561 ) ## 49 million
+
+ZJets_AMC_hiStat = sample( name = 'ZJets_AMC_hiStat',
+                    DAS  = '/DYJetsToLL_M-105To160_TuneCP5_PSweights_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM',
+                    nEvt = 53482147)  ## 53.4 million
+
+ZJets_MG_hiStat = sample( name = 'ZJets_MG_hiStat',
+                    DAS  = '/DYJetsToLL_M-105To160_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/RunIIFall17MiniAODv2-PU2017_12Apr2018_94X_mc2017_realistic_v14-v1/MINIAODSIM',
+                    nEvt = 57698154)  ## 57.7 million
 
 # ZJets_hiM_AMC = sample( name = 'ZJets_hiM_AMC',
 #                         DAS  = '/DYJetsToLL_M-105To160_TuneCP5_PSweights_13TeV-amcatnloFXFX-pythia8/RunIIFall17MiniAODv2*/MINIAODSIM',
@@ -284,8 +306,8 @@ ZJets_MG_2 = sample( name = 'ZJets_MG_2',
 
 
 Background.append(ZJets_AMC)
-Background.append(ZJets_MG_1)
-Background.append(ZJets_MG_2)
+# Background.append(ZJets_MG_1)
+# Background.append(ZJets_MG_2)
 # Background.append(ZJets_hiM_AMC)
 # Background.append(ZJets_hiM_MG)
 
